@@ -3,10 +3,10 @@ services:
   - docker
 
 before_build:
-  - docker build -t pogidaevmo/id -f ./client/Dockerfile ./client
+  - docker build -t pogidaevmo/multy -f ./client/Dockerfile ./client
 
 script:
-  - docker run pogidaevmo/id npm run test -- --coverage
+  - docker run pogidaevmo/multy npm run test -- --coverage
 
 after_success:
   - docker build -t pogidaevmo/multy-client ./client
