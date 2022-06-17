@@ -17,6 +17,7 @@ jobs:
     - name: Run tests
       run: |
         cd ./client
+        npm install source-map-resolve
         npm i
         npm run test
         
