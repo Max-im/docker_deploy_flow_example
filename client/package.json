@@ -10,18 +10,18 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
-    "docker:dev:build": "docker build -f Dockerfile.dev -t mpozhydaiev/deploy_flow_client .",
-    "dev:test": "docker exec -it client npm run test",
-    "dev": "docker-compose up",
-    "prod:build": "docker build -t mpozhydaiev/deploy_flow_client_prod .",
-    "prod": "docker run -p 8080:80 mpozhydaiev/deploy_flow_client_prod"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "CI=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:dev:build": "docker build -f Dockerfile.dev -t mpozhydaiev/deploy_flow_client .",
+    "dev:test": "docker exec -it client npm run test",
+    "dev": "docker-compose up",
+    "prod:build": "docker build -t mpozhydaiev/deploy_flow_client_prod .",
+    "prod": "docker run -p 8080:80 mpozhydaiev/deploy_flow_client_prod"
   },
   "eslintConfig": {
     "extends": "react-app"
