@@ -16,7 +16,7 @@ jobs:
     - name: run tests
       run: |
         cd client
-        echo ll
+        ll
     # - name: Install Dependencies
     #   run: |
     #     python -m pip install --upgrade pip
