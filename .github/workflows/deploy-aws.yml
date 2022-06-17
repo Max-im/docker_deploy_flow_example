@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Testing
-      uses: actions/checkout@v2
-    - name: run tests
+    - name: Copy repo code
+      uses: actions/checkout@v1
+
+    - name: Run tests
       run: |
-        cd client
-        ll
+        cd ./client
+        npm run test
+        
     # - name: Install Dependencies
     #   run: |
     #     python -m pip install --upgrade pip
