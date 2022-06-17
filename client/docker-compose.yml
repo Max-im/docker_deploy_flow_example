@@ -1,0 +1,13 @@
+version: '3'
+services:
+  client:
+    image: mpozhydaiev/deploy_flow_client
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    container_name: client
+

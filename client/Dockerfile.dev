@@ -1,9 +1,11 @@
-FROM node:alpine
+FROM node
+
 WORKDIR /app
+
 COPY ./package.json ./
 RUN npm install
 COPY . .
+
 CMD [ "npm", "start" ]
 
-# sudo docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app build-id
-# CI=true !!!
+EXPOSE 3000
