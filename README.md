@@ -1,4 +1,13 @@
-#Docker deployment example
+# Multy Container Docker Application example
 
-Status of last deployment:<br>
-<img src="https://github.com/max-im/ docker_deploy_flow_example/workflows/test_build_deploy_to_AWS_EC2/badge.svg?branch=master"/></br>
+## Created as an example application with few docker contatiners
+
+![example workflow](https://github.com/max-im/docker_deploy_flow_example/actions/workflows/deploy-aws.yml/badge.svg)
+
+## Features
+
+- Docker
+- React
+- Node
+- Redis
+- Postgress

@@ -1,65 +1,58 @@
-name: test_build_deploy_to_AWS_EC2
+# name: test_build_deploy_to_AWS_EC2
 
-env:
-  AWS_S3_BACKET_NAME    : "deploy-flow-github-actions"
-  AWS_EB_APP_NAME       : "docker-flow"
-  AWS_EB_ENV_NAME       : "Dockerflow-env"
-  AWS_REGION            : "us-east-2"
-  DEPLOY_PACKAGE_NAME   : "docker-flow-${{ github.sha }}.zip"
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#     branches: [master]
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+#     steps:
+#     - name: Copy repo code
+#       uses: actions/checkout@v1
 
-    steps:
-    - name: Copy repo code
-      uses: actions/checkout@v1
-
-    - name: Install Dependencies
-      run: |
-        cd ./client
-        npm install source-map-resolve
-        npm install react-scripts -g --silent
+#     - name: Install Dependencies
+#       run: |
+#         cd ./client
+#         npm install source-map-resolve
+#         npm install react-scripts -g --silent
   
-    - name: Run Tests
-      run: |
-        cd ./client
-        npm run test
+#     - name: Run Tests
+#       run: |
+#         cd ./client
+#         npm run test
 
-      # RUN TESTS for another services
+#       # RUN TESTS for another services
 
-  build:
-    needs: [test]
-    runs-on: ubuntu-latest
+#   build:
+#     needs: [test]
+#     runs-on: ubuntu-latest
 
-    steps: 
-      - name: Copy repo code
-        uses: actions/checkout@v1
+#     steps: 
+#       - name: Copy repo code
+#         uses: actions/checkout@v1
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: us-east-2
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: deploy-flow
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          cd ./client
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#       - name: Build, tag, and push image to Amazon ECR
+#         env:
+#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#           ECR_REPOSITORY: deploy-flow
+#           IMAGE_TAG: ${{ github.sha }}
+#         run: |
+#           cd ./client
+#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
