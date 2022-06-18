@@ -1,29 +1,29 @@
-# name: test_build_deploy_to_AWS_EC2
+name: test_build_deploy_to_AWS_EC2
 
-# on:
-#   push:
-#     branches: [master]
-#   pull_request:
-#     branches: [master]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Copy repo code
-#       uses: actions/checkout@v1
+    steps:
+    - name: Copy repo code
+      uses: actions/checkout@v1
 
-#     - name: Install Dependencies
-#       run: |
-#         cd ./client
-#         npm install source-map-resolve
-#         npm install react-scripts -g --silent
+    - name: Install Dependencies
+      run: |
+        cd ./client
+        npm install source-map-resolve
+        npm install react-scripts -g --silent
   
-#     - name: Run Tests
-#       run: |
-#         cd ./client
-#         npm run test
+    - name: Run Tests
+      run: |
+        cd ./client
+        npm run test
 
 #       # RUN TESTS for another services
 

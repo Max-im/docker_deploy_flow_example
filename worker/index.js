@@ -1,22 +1,20 @@
 const keys = require('./keys');
-const redis = require('redis');
+const { createClient } = require('redis');
 
-console.log(keys, 'redis');
-const redisClient = redis.createClient({
-  host: keys.redisHost,
-  port: keys.redisPort,
-  retry_strategy: () => 1000,
-});
+(async () => {
+  const client = createClient({ url: `redis://${keys.redisHost}:${keys.redisPort}` });
+  client.on('error', (err) => console.log('Redis Client Error', err));
 
-const sub = redisClient.duplicate();
+  await client.connect();
+  const sub = client.duplicate();
+  await sub.connect();
+
+  await sub.subscribe('insert', async (message) => {
+    await client.HSET('values', message, fib(parseInt(message)));
+  });
+})();
 
 function fib(i) {
   if (i < 2) return 1;
   return fib(i - 1) + fib(i - 2);
 }
-
-sub.on('message', (chanel, message) => {
-  redisClient.hset('values', message, fib(parseInt(message)));
-});
-
-sub.subscribe('insert');

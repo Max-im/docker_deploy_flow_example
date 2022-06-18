@@ -2,12 +2,19 @@
 
 ## Created as an example application with few docker contatiners
 
-![example workflow](https://github.com/max-im/docker_deploy_flow_example/actions/workflows/deploy-aws.yml/badge.svg)
+![example workflow](https://github.com/max-im/multi_docker_app_deploy_flow/actions/workflows/deploy-aws.yml/badge.svg)
 
 ## Features
 
 - Docker
+- Nginx
 - React
 - Node
 - Redis
 - Postgress
+
+## Using
+
+- clone the repo
+- run `docker-compose up --build`
+- open you browser on `http://localhost:3050/`
