@@ -1,10 +1,9 @@
 {
   "name": "multi_docker_app_deploy_flow",
   "version": "1.0.0",
-  "description": "## Created as an example application with few docker contatiners",
-  "main": "index.js",
+  "description": "Created as an example application with few docker contatiners",
   "scripts": {
-    "start": "docker-compose up --build"
+    "start": "cd docker && docker-compose up --build"
   },
   "keywords": [],
   "author": "",
