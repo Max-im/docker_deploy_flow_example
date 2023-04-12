@@ -21,20 +21,20 @@ services:
       context: ../server
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ../server:/app
     env_file:
     - .env
   client:
     build:
       dockerfile: Dockerfile
-      context: ./client
+      context: ../client
     volumes:
       - /app/node_modules
       - ../client:/app
   worker:
     build:
       dockerfile: Dockerfile
-      context: ./worker
+      context: ../worker
     volumes:
       - /app/node_modules
       - ../worker:/app
