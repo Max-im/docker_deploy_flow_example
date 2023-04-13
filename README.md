@@ -16,5 +16,5 @@
 ## Using
 
 - clone the repo
-- run `docker-compose up --build`
+- run `npm start`
 - open you browser on `http://localhost:3050/`
