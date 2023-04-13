@@ -12,32 +12,32 @@ services:
     restart: always
     build:
       dockerfile: Dockerfile.dev
-      context: ../nginx
+      context: ../../nginx
     ports:
       - '3050:80'
   api:
     build:
       dockerfile: Dockerfile.dev
-      context: ../server
+      context: ../../server
     volumes:
       - /app/node_modules
-      - ../server:/app
+      - ../../server:/app
     env_file:
     - .env
   client:
     build:
       dockerfile: Dockerfile.dev
-      context: ../client
+      context: ../../client
     volumes:
       - /app/node_modules
-      - ../client:/app
+      - ../../client:/app
   worker:
     build:
       dockerfile: Dockerfile.dev
-      context: ../worker
+      context: ../../worker
     volumes:
       - /app/node_modules
-      - ../worker:/app
+      - ../../worker:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
