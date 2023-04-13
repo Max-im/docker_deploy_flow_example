@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+const keys = require('../keys');
 
 const sequelize = new Sequelize(keys.pgDb, keys.pgUser, keys.pgPassword, {
 	dialect: 'postgres',
