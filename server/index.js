@@ -19,7 +19,7 @@ const pgClient = new Pool({
 });
 
 pgClient
-  .query('CREATE TABLE IF NOT EXISTS values(number INT)')
+  .query(`CREATE TABLE IF NOT EXISTS ${keys.pgDb}(number INT)`)
   .catch((err) => console.error('not create table: ' + err));
 
 // REDIS
@@ -39,7 +39,7 @@ pgClient
 
   app.get('/values/all', (req, res) => {
     pgClient
-      .query(`SELECT * FROM values`)
+      .query(`SELECT * FROM ${keys.pgDb}`)
       .then(({ rows }) => res.send(rows))
       .catch((err) => console.error(err));
   });
@@ -57,7 +57,7 @@ pgClient
     await redisPublisher.publish('insert', index);
 
     pgClient
-      .query('INSERT INTO values(number) VALUES($1)', [index])
+      .query(`INSERT INTO ${keys.pgDb}(number) VALUES($1)`, [index])
       .catch((err) => console.error(err));
     res.send({ working: true });
   });
