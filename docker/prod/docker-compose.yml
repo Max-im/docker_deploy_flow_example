@@ -11,8 +11,8 @@ services:
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile.dev
-      context: ../../nginx
+      dockerfile: Dockerfile
+      context: ../../nginx/prod
     ports:
       - '3050:80'
   api:
