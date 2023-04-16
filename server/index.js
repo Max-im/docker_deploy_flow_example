@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const { createClient } = require('redis');
 // const { Pool } = require('pg');
-const {sequelize} = require('./db');
 
 // EXPRESS
 const app = express();
@@ -26,8 +25,6 @@ app.use(express.json());
 // REDIS
 
 (async () => {
-  await sequelize.authenticate();
-
   const client = createClient({ url: `redis://${keys.redisHost}:${keys.redisPort}` });
   client.on('error', (err) => console.log('Redis Client Error ***************************', err));
 
@@ -37,7 +34,7 @@ app.use(express.json());
 
   // ROUTES
   app.get('/', (req, res) => {
-    res.send('hi');
+    res.send('hello');
   });
 
   app.get('/values/all', (req, res) => {

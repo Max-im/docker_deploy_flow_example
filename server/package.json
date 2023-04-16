@@ -7,17 +7,17 @@
     "dev:build": "docker build -f Dockerfile.dev -t mpozhydaiev/multy_server .",
     "dev:run": "docker run mpozhydaiev/multy_server",
     "start": "node index.js",
-    "dev": "nodemon"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Maksym Pozhydaiev <pogidaevmo@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "pg": "^8.3.2",
-    "redis": "^4.1.0",
-    "sequelize": "^6.31.0"
+    "prisma": "^4.12.0",
+    "redis": "^4.1.0"
   }
 }
