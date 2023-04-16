@@ -23,8 +23,10 @@ services:
       dockerfile: Dockerfile.dev
       context: ../../server
     depends_on:
-      - db-server 
-      - migration
+      db-server:
+        condition: service_healthy
+      migration:
+        condition: service_completed_successfully
     env_file:
     - .env
     environment:
@@ -32,9 +34,8 @@ services:
   migration:
     build: ../../db
     depends_on:
-      - db-server
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db-server/${DB_NAME}?schema=public
+      db-server:
+        condition: service_healthy
   client:
     build:
       dockerfile: Dockerfile.dev
