@@ -10,9 +10,7 @@ services:
     image: "redis:alpine"
   nginx:
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ../../nginx/prod
+    build: ../../nginx
     ports:
       - '3050:80'
   api:
