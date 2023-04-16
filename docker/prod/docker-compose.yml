@@ -18,25 +18,21 @@ services:
     build: ../../nginx
     ports:
       - '3050:80'
-  migration:
-    build: ../../db
-    depends_on:
-      db-server:
-        condition: service_healthy
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db-server/${DB_NAME}?schema=public
   api:
     build:
       dockerfile: Dockerfile.dev
       context: ../../server
     depends_on:
-      db-server: 
-        condition: service_healthy
-      migration:
-        condition: service_completed_successfully
-      
+      - db-server 
+      - migration
     env_file:
-    - ../.env
+    - .env
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db-server/${DB_NAME}?schema=public
+  migration:
+    build: ../../db
+    depends_on:
+      - db-server
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db-server/${DB_NAME}?schema=public
   client:
@@ -46,7 +42,7 @@ services:
     volumes:
       - /app/node_modules
       - ../../client:/app
-  worker:
+  worker-service:
     build:
       dockerfile: Dockerfile.dev
       context: ../../worker

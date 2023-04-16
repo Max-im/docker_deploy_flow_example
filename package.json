@@ -4,7 +4,7 @@
   "description": "Created as an example application with few docker contatiners",
   "scripts": {
     "start": "cd docker/prod && docker-compose up --build",
-    "dev": "cd docker/prod && docker-compose up --build",
+    "dev": "cd docker/dev && docker-compose up --build",
     "web:terminal": "docker exec -it react sh"
   },
   "keywords": [],
